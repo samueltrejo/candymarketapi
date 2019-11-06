@@ -29,28 +29,28 @@ namespace CandyMarket.Api.Controllers
         }
 
         [HttpGet("{candyId}")]
-        public Candy Get(Guid candyId)
+        public Candy Get(int candyId)
         {
             return _repo.GetAllCandy().FirstOrDefault(candy => candy.Id == candyId);
         }
 
         [HttpPost]
-        public void Add(AddCandyDto newCandy)
+        public Candy Add(AddCandyDto newCandy)
         {
-            _repo.AddCandy(newCandy);
+            return _repo.AddCandy(newCandy);
         }
 
         [HttpDelete("{candyIdToDelete}/eat")]
-        public void Delete(Guid candyIdToDelete)
+        public bool Delete(int candyIdToDelete)
         {
-            _repo.EatCandy(candyIdToDelete);
+            return _repo.EatCandy(candyIdToDelete);
         }
 
         [HttpDelete("{candyIdToDonate}/donate")]
-        public void Donate(Guid candyIdToDonate)
+        public bool Donate(int candyIdToDonate)
         {
             // todo: make this endpoint behave less greedy and more honest
-            _repo.EatCandy(candyIdToDonate);
+            return _repo.EatCandy(candyIdToDonate);
         }
 
         //[HttpPost]
