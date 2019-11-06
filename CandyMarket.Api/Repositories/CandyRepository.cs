@@ -26,10 +26,14 @@ namespace CandyMarket.Api.Repositories
             using (var db = new SqlConnection(_connectionString))
             {
                 var sql = @"insert into [candy]
-                                ([name])
+                                ([name],
+                                [manufacturer],
+                                [category])
                                 output inserted.*
                                 values
-                                (@name)";
+                                (@name,
+                                @manufacturer,
+                                @category)";
 
                 var candy = db.QueryFirst<Candy>(sql, newCandy);
                 return candy;
